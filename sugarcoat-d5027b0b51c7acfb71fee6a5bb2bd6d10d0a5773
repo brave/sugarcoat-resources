@@ -1,0 +1,141 @@
+{
+    const $___mock_c56a9de04a4c48e7 = {};
+    (exports => {
+        'use strict';
+        let isSealed = false;
+        class Storage {
+            constructor() {
+                if (isSealed) {
+                    throw new TypeError('Illegal constructor');
+                }
+            }
+            get length() {
+                return Object.keys(this).length;
+            }
+            key(index) {
+                const keys = Object.keys(this);
+                if (index < 0 || index >= keys.length) {
+                    return null;
+                }
+                return keys[index];
+            }
+            getItem(key) {
+                return Object.prototype.hasOwnProperty.call(this, key) ? this[key] : null;
+            }
+            setItem(key, value) {
+                this[key] = String(value);
+            }
+            removeItem(key) {
+                delete this[key];
+            }
+            clear() {
+                const keys = Object.keys(this);
+                for (const key of keys) {
+                    delete this[key];
+                }
+            }
+        }
+        exports.Storage = {
+            configurable: true,
+            enumerable: true,
+            value: Storage,
+            writable: true
+        };
+        const localStorage = new Storage();
+        exports.localStorage = {
+            configurable: true,
+            enumerable: true,
+            get() {
+                return localStorage;
+            }
+        };
+        const sessionStorage = new Storage();
+        exports.sessionStorage = {
+            configurable: true,
+            enumerable: true,
+            get() {
+                return sessionStorage;
+            }
+        };
+        isSealed = true;
+    })($___mock_c56a9de04a4c48e7);
+    (function () {
+        Marketing.bindDependencyDOMParsed(function () {
+            var Bootstrapper = window['Marketing'];
+            var ensightenOptions = Marketing.ensightenOptions;
+            try {
+                Marketing.UDO.perfTimingStart('ruleId-' + this.id + '-deploymentId-' + this.deploymentId);
+                var marketingUDO = Marketing.UDO;
+                var dellFlag = true;
+                var prefixUrl = 'https://www.facebook.com/tr?id=641890776746393';
+                var firePixel = function (evVal, dellFlag, pageViewFlag) {
+                    var eventURL = prefixUrl + '&ev=' + evVal + '&cd[value]=' + marketingUDO.revenue + '&cd[currency]=USD&cd[content_ids]=' + marketingUDO.ordercode + '&cd[seg]=' + marketingUDO.segment + '&cd[family]=' + marketingUDO.family + '&cd[content_type]=product';
+                    if (dellFlag == true)
+                        if (pageViewFlag)
+                            Marketing.imageRequest(prefixUrl + '&ev=PageView&dl=www.dell.com&noscript=1');
+                        else
+                            Marketing.imageRequest(eventURL + '&dl=www.dell.com&noscript=1');
+                    else if (pageViewFlag)
+                        Marketing.imageRequest(prefixUrl + '&ev=PageView&noscript=1');
+                    else
+                        Marketing.imageRequest(eventURL + '&noscript=1');
+                };
+                var checkPageType = function (dellFlag) {
+                    firePixel('PageView', dellFlag, true);
+                    if (Marketing.scDataObj.module.includes('serviceselection'))
+                        firePixel('Customize', dellFlag, false);
+                    else if (marketingUDO.promoid === '7')
+                        firePixel('ViewContent', dellFlag, false);
+                    if (marketingUDO.promoid === '8')
+                        firePixel('Accessories', dellFlag, false);
+                    if (marketingUDO.promoid === '9')
+                        firePixel('AddToCart', dellFlag, false);
+                    if (marketingUDO.promoid === '4')
+                        firePixel('Deals', dellFlag, false);
+                };
+                if (window.location.href.includes('dell.com'))
+                    dellFlag = true;
+                if (window.location.href.includes('alienwarearena.com'))
+                    dellFlag = false;
+                if (!/delltech|dellemc/i.test(Marketing.scDataObj.cms))
+                    checkPageType(dellFlag);
+                Marketing.UDO.perfTimingEnd('ruleId-' + this.id + '-deploymentId-' + this.deploymentId);
+            } catch (e) {
+                dell_marketing_util.debug(e);
+            }
+        }, 3609568, [3606329], 670670, [610323]);
+        Marketing.bindDependencyDOMParsed(function () {
+            const $___old_1d26d0732c849a66 = {}.constructor.getOwnPropertyDescriptor(window, 'sessionStorage');
+            try {
+                if ($___old_1d26d0732c849a66)
+                    ({}.constructor.defineProperty(window, 'sessionStorage', $___mock_c56a9de04a4c48e7.sessionStorage));
+                return function () {
+                    var Bootstrapper = window['Marketing'];
+                    var ensightenOptions = Marketing.ensightenOptions;
+                    try {
+                        Marketing.UDO.perfTimingStart('ruleId-' + this.id + '-deploymentId-' + this.deploymentId);
+                        var pixelStartUrl = 'https://www.facebook.com/tr?id=641890776746393&ev=';
+                        var pixelEndUrl = '&dl=www.delltechnologies.com&noscript=1';
+                        Marketing.imageRequest(pixelStartUrl + 'PageView' + pixelEndUrl);
+                        Marketing.UDO.hve_mpv(pixelStartUrl + 'TotalHVEs' + pixelEndUrl);
+                        Marketing.UDO.hve_mpv(pixelStartUrl + 'HVEMultiPageView' + pixelEndUrl);
+                        Marketing.UDO.hve_download(pixelStartUrl + 'TotalHVEs' + pixelEndUrl);
+                        Marketing.UDO.hve_download(pixelStartUrl + 'HVEAssetDownloads' + pixelEndUrl);
+                        Marketing.UDO.hve_bcove(pixelStartUrl + 'TotalHVEs' + pixelEndUrl);
+                        Marketing.UDO.hve_bcove(pixelStartUrl + 'VideoStart' + pixelEndUrl);
+                        Marketing.UDO.hve_rfq_submit(pixelStartUrl + 'TotalHVEs' + pixelEndUrl);
+                        Marketing.UDO.hve_chat(pixelStartUrl + 'TotalHVEs' + pixelEndUrl);
+                        Marketing.UDO.hve_contactUs(pixelStartUrl + 'TotalHVEs' + pixelEndUrl);
+                        Marketing.UDO.hve_social(pixelStartUrl + 'TotalHVEs' + pixelEndUrl);
+                        Marketing.UDO.perfTimingEnd('ruleId-' + this.id + '-deploymentId-' + this.deploymentId);
+                    } catch (e) {
+                        dell_marketing_util.debug(e);
+                    }
+                }.apply(this, arguments);
+            } finally {
+                if ($___old_1d26d0732c849a66)
+                    ({}.constructor.defineProperty(window, 'sessionStorage', $___old_1d26d0732c849a66));
+            }
+        }, 3609567, [3606329], 681492, [610323]);
+    }())
+}
